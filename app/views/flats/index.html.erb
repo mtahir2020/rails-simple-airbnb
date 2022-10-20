@@ -1,0 +1,38 @@
+
+<nav class="navbar bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">Simple AirBnB</span>
+    <form action="/flats" method="get">
+      <input type="text" name="search" value= "<%= params[:search] %>" placeholder="Search here..">
+      <input type="submit">
+    </form>
+    <p> <%= link_to "Add flat", new_flat_path %></p>
+  </div>
+</nav>
+
+<div class="container">
+
+<% if @search %>
+  <%= @flats.length%> found.
+<% else %>
+  <%= @flats.length %> flats.
+<% end %>
+
+<h2>All our flats</h2>
+
+<p> <%= @flats.length %> flats showing. </p>
+
+  <% @flats.each do |flat| %>
+    <div class="card" style="width: 18rem;">
+      <img src=<%=flat.picture_url%>% class="card-img-top" alt="...">
+      <div class="card-body">
+        <p><b><%= flat.name %></b></p>
+        <p><%= flat.description %></p>
+        <p><%= flat.address %></p>
+        <p>Guests: <%= flat.number_of_guests %> </p>
+        <p>Price / night: ¢<%= flat.price_per_night %> </p>
+        <p> <%= link_to "More info", flat_path(flat) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
